@@ -1,0 +1,44 @@
+{
+  "name": "tintucthethao",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "dependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/ejs": "^3.1.5",
+    "@types/express-session": "^1.18.1",
+    "@types/multer": "^1.4.12",
+    "@types/nodemailer": "^6.4.17",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.12.0",
+    "nodemailer": "^6.10.0",
+    "reflect-metadata": "^0.2.2",
+    "tsconfig-paths": "^4.2.0",
+    "typeorm": "^0.3.20"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "nodemon -r tsconfig-paths/register src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.1",
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.10",
+    "typescript": "^5.7.3"
+  }
+}

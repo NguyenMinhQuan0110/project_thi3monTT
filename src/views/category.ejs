@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài viết theo thể loại - <%= category.name %> - SportNew</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/home">
+                <img src="/img/image(1280).png" alt="">
+                <h1>SportNew</h1>
+            </a>           
+        </div>
+        <div class="search-container">
+            <form action="/search" method="get">
+                <input type="text" placeholder="Tìm kiếm bài viết..." name="keywords">
+                <button type="submit">Tìm</button>
+            </form>
+        </div>
+        <div class="login-register-container">
+            <% if (session.userLogin) { %>
+                <div class="user-info">
+                    <a href="/update-profile" style="text-decoration: none; color: black;">
+                    <img src="/img/avatar/<%= session.userLogin.avatar || '3de6a81aad5f0c01554e-1714647805-183319avatar.jpg' %>" alt="" style="border-radius: 30px; min-width: 40px;height: 60px;object-fit: cover;">
+                    <span style="font-style:oblique; font-size: 20px;"><%= session.userLogin.username %></span></a>
+                    <a href="/logout"><button>Đăng xuất</button></a>
+                </div>
+                <% if (session.userLogin.roles && session.userLogin.roles.some(role => role.id === 3 || role.id === 1)) { %>
+                    <a href="/admin/index" style="text-decoration: none;color:white;"><button style="position: absolute; right: 0px; top: 10px;">Hello Admin</button></a>
+                <% } %>
+            <% } else { %>
+                <a href="/login"><button>Đăng nhập</button></a>
+                <a href="/register"><button>Đăng ký</button></a>
+            <% } %>
+        </div>
+    </header>
+
+    <div class="menu">
+        
+        <ul>
+            <li><a href="/home">Trang chủ</a></li>
+            <li><a href="/category/1">Bóng đá Việt Nam</a>
+                    <ul>
+                        <li><a href="/category/2">Đội tuyển quốc gia</a></li>
+                        <li><a href="/category/3">V-league</a></li>
+                        <li><a href="/category/4">Bóng đá trẻ</a></li>
+                        <li><a href="/category/5">Bóng đá Nữ</a></li>
+                        <li ><a href="">Xem thêm <img src="/img/iconmuiten.png" alt="" ></a>
+                            <ul>
+                                <li><a href="/category/6">Futsan</a></li>
+                                <li><a href="/category/7">AFC Cup-C1</a></li>
+                                <li><a href="/category/11">U23 Châu Á</a></li>
+                                <li><a href="/category/10">U19 Châu Á</a></li>
+                                <li><a href="/category/9">U21 Quốc Gia</a></li>
+                                <li><a href="/category/8">Cup Quốc Gia</a></li>
+                            </ul>    
+                        </li>
+                    </ul>                   
+            </li>
+            <li><a href="/category/12">Bóng đá quốc tế</a>
+                <ul>
+                    <li><a href="/category/13">Bóng đá Anh</a></li>
+                    <li><a href="/category/14">Bóng đá Tây Ban Nha</a></li>
+                    <li><a href="/category/15">Bóng đá Ý</a></li>
+                    <li><a href="/category/16">Bóng đá Đức</a></li>
+                    <li><a href="/category/17">Bóng đá Pháp</a></li>
+                    <li><a href="/category/18">C1 Châu Âu</a></li>
+                    <li ><a href="">Xem thêm <img src="/img/iconmuiten.png" alt="" ></a>
+                        <ul>
+                            <li><a href="/category/19">Các giải khác</a></li>
+                            <li><a href="/category/20">UAFA Nations League</a></li>
+                            <li><a href="/category/21">Copa America 2024</a></li>
+                            <li><a href="/category/22">C2 Châu Âu</a></li>
+                            <li><a href="/category/23">C3 Châu Âu</a></li>
+                            <li><a href="/category/24">CONCACAP Gold Cup</a></li>
+                        </ul>    
+                    </li>
+                </ul>     
+            </li>
+            <li><a href="/category/25">Esports</a>
+                <ul>
+                    <li><a href="/category/26">LMHT</a></li>
+                    <li><a href="/category/27">Đấu trường chân lý</a></li>
+                    <li><a href="/category/28">LMHT tốc chiến</a></li>
+                    <li><a href="/category/29">Vanlorant</a></li>
+                    <li><a href="/category/30">PUPG</a></li>
+                    <li ><a href="">Xem thêm <img src="/img/iconmuiten.png" alt="" ></a>
+                        <ul>
+                            <li><a href="/category/31">FIFA online 04</a></li>
+                            <li><a href="/category/32">Dota 2</a></li>
+                            <li><a href="/category/33">PES</a></li>
+                            <li><a href="/category/34">Liên quân Mobie</a></li>
+                        </ul>    
+                    </li>
+                </ul>     
+            </li>
+            <li><a href="/category/35">Chuyển nhượng</a></li>
+            <li><a href="/category/36">Nhận định</a></li>
+            <li><a href="/category/37">Thê thao</a>
+                <ul>
+                    <li><a href="/category/38">Bóng chuyền</a></li>
+                    <li><a href="/category/39">Bóng rổ</a></li>
+                    <li><a href="/category/40">Cầu lông</a></li>
+                    <li><a href="/category/41">Cờ vua</a></li>
+                    <li><a href="/category/42">Bóng bàn</a></li>
+                    <li><a href="/category/43">Bóng đá phủi</a></li>
+                    <li ><a href="">Xem thêm <img src="/img/iconmuiten.png" alt="" ></a>
+                        <ul>
+                            <li><a href="/category/44">Quần vợt</a></li>
+                            <li><a href="/category/45">Võ thuật</a></li>
+                            <li><a href="/category/46">Boxing</a></li>
+                            <li><a href="/category/47">MMA</a></li>
+                            <li><a href="/category/48">Điền kinh</a></li>
+                            <li><a href="/category/49">Các môn khác</a></li>
+                        </ul>    
+                    </li>
+                </ul>   
+            </li>
+        </ul>
+    </div>
+
+    <div class="category-articles" style="margin-left: 20%;">
+        <h2>Bài viết trong thể loại: "<%= category.name %>"</h2>
+        <div id="category-articles-list">
+            <% if (articles && articles.length > 0) { %>
+                <% articles.forEach(article => { %>
+                    <div class="news-item">
+                        <div class="news-thumbnail">
+                            <a href="/detail/<%= article.id %>">
+                                <img src="/img/articles/<%= article.images && article.images.length > 0 ? article.images[0].path : 'default-image.jpg' %>" alt="News Thumbnail">
+                            </a>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title"><a href="/detail/<%= article.id %>"><%= article.title %></a></h3>
+                            <p class="news-summary"><%= article.description %></p>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>Không có bài viết nào trong thể loại này.</p>
+            <% } %>
+        </div>
+        <% if (totalArticles > 1) { %>
+            <button id="show-more-btn" style="display: block; margin: 20px auto; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; border-radius: 5px;">Show More</button>
+        <% } %>
+    </div>
+
+    <footer>
+        <div class="tren">
+            <div class="trentren">
+                <div class="logo">
+                    <a href="" style="text-decoration: none;">
+                        <img src="/img/image(1280).png" alt="">
+                        <h1>SportNew</h1>
+                    </a>           
+                </div>       
+            </div>
+            <div class="duoitren">
+                <ul><p>Tiện ích bóng đá</p>
+                    <li><a href="">Lịch thi đấu</a></li>
+                    <li><a href="">Kết quả bóng đá</a></li>
+                    <li><a href="">Nhận định bóng đá</a></li>
+                </ul>
+                <ul><p>Giải đấu nổi bật</p>
+                    <li><a href="">Ngoại hạng anh</a></li>
+                    <li><a href="">Cup c1</a></li>
+                    <li><a href="">La Liga</a></li>
+                    <li><a href="">Seri A</a></li>
+                    <li><a href="">Bundesliga</a></li>
+                    <li><a href="">V-league</a></li>
+                    <li><a href="">League 1</a></li>
+                    <li><a href="">World Cup</a></li>
+                </ul>
+                <ul><p>Bảng xếp hạng bóng đá</p>
+                    <li><a href="">BXH Ngoại hạng anh</a></li>
+                    <li><a href="">BXH Cup c1</a></li>
+                    <li><a href="">BXH La Liga</a></li>
+                    <li><a href="">BXH Seri A</a></li>
+                    <li><a href="">BXH Bundesliga</a></li>
+                    <li><a href="">BXH V-league</a></li>
+                </ul>
+                <ul><p>Thể thao tổng hợp</p>
+                    <li><a href="">Cầu lông</a></li>
+                    <li><a href="">Bóng chuyền</a></li>
+                    <li><a href="">Quần vợt</a></li>
+                    <li><a href="">Esports</a></li>
+                    <li><a href="">Xe cộ</a></li>
+                    <li><a href="">Võ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="duoi">
+            <div class="trongduoi">
+                <ul><p>Liên hệ</p>
+                    <li><a href="">Giới thiệu</a></li>
+                    <li><a href="">Chính sách bảo mật</a></li>
+                    <li><a href="">Quảng cáo</a></li>
+                </ul>
+                <ul><p>Social</p>
+                    <li><a href="">Youtube</a></li>
+                    <li><a href="">Facebook</a></li>
+                </ul>
+                <ul style="width: 50%;"><p style="color: black;">Công Ty CP Dịch Vụ Truyền thông SportNew</p>
+                    <li>Người chịu trách nhiệm quản lý nội dung:<b style="color: black;">Nguyễn Minh Quân</b></li>
+                    <li>Giấy phép trang tin điện tử tổng hợp số: <b style="color: black;">1749/GP-TTĐT</b> do Sở Thông tin và Truyền thông Hà Nội cấp ngày 28/04/2017</li>
+                    <li><b style="color: black;">Địa chỉ giao dịch</b>: Căn 12, Mộc Lan 6 (ML6-12), khu đô thị Vinhomes Green Bay, phường Mễ Trì, quận Nam Từ Liêm, Hà Nội</li>
+                    <li><b style="color: black;">Hotline</b>: 0847 100 247 / <b style="color: black;">Email</b>: contact@thethao247.vn</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentSkip = 1; // Số bài viết đã hiển thị ban đầu (1 bài)
+        const categoryId = '<%= categoryId %>'; // Lấy categoryId từ server
+
+        document.getElementById('show-more-btn')?.addEventListener('click', async () => {
+            try {
+                const response = await fetch(`/load-more-category?skip=${currentSkip}&categoryId=${categoryId}`);
+                if (!response.ok) throw new Error('Lỗi khi tải thêm bài viết');
+                const data = await response.json();
+
+                const articlesList = document.getElementById('category-articles-list');
+                data.articles.forEach(article => {
+                    const articleElement = document.createElement('div');
+                    articleElement.className = 'news-item';
+                    articleElement.innerHTML = `
+                        <div class="news-thumbnail">
+                            <a href="/detail/${article.id}">
+                                <img src="/img/articles/${article.images && article.images.length > 0 ? article.images[0].path : 'default-image.jpg'}" alt="News Thumbnail">
+                            </a>
+                        </div>
+                        <div class="news-content">
+                            <h3 class="news-title"><a href="/detail/${article.id}">${article.title}</a></h3>
+                            <p class="news-summary">${article.description}</p>
+                        </div>
+                    `;
+                    articlesList.appendChild(articleElement);
+                });
+
+                currentSkip += 1; // Tăng số bài viết đã hiển thị
+
+                if (!data.hasMore) {
+                    document.getElementById('show-more-btn').style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error loading more articles:', error);
+                alert('Đã có lỗi xảy ra khi tải thêm bài viết. Vui lòng thử lại sau.');
+            }
+        });
+    </script>
+</body>
+</html>

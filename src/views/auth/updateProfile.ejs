@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/updateProfile.css">
+</head>
+<body>
+    <div class="container-xl px-4 mt-4">
+        <!-- Account page navigation-->
+        <nav class="nav nav-borders">
+            <a class="nav-link" href="/home" >Trang chủ</a>
+        </nav>
+        <hr class="mt-0 mb-4">
+        <div class="row">
+            <div class="col-xl-4">
+                <!-- Profile picture card-->
+                <div class="card mb-4 mb-xl-0">
+                    <div class="card-header">Profile Picture</div>
+                    <div class="card-body text-center">
+                        <!-- Profile picture image-->
+                        <img class="img-account-profile rounded-circle mb-2" src="/img/avatar/<%= user.avatar ||'3de6a81aad5f0c01554e-1714647805-183319avatar.jpg' %>" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8">
+                <!-- Account details card-->
+                <div class="card mb-4">
+                    <div class="card-header">Account Details</div>
+                    <div class="card-body">
+                        <form action="/update-profile" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label class="small mb-1" for="username">Tên đăng nhập</label>
+                                <input class="form-control" id="username" name="username" type="text" value="<%= user.username %>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="email">Email</label>
+                                <input class="form-control" id="email" name="email" type="email" value="<%= user.email %>" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="password">Mật khẩu mới (nếu đổi)</label>
+                                <input class="form-control" id="password" name="password" type="password" placeholder="Nhập mật khẩu mới">
+                            </div>
+                             <!-- Form Group (gender)-->
+                             <div class="mb-3">
+                                <label class="form-label">Gender</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="gender" value="Nam" <%= user.gender === 'Nam' ? 'checked' : '' %> required>
+                                    <label class="form-check-label">Nam</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="gender" value="Nữ" <%= user.gender === 'Nữ' ? 'checked' : '' %> required>
+                                    <label class="form-check-label">Nữ</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="gender" value="Other" <%= user.gender === 'Other' ? 'checked' : '' %> required>
+                                    <label class="form-check-label">Other</label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="avatar">Ảnh đại diện (nếu đổi)</label>
+                                <div class="small font-italic text-muted mb-2">JPG hoặc PNG không quá 5 MB</div>
+                                <input class="form-control" type="file" name="avatar">
+                            </div>
+                            <!-- Save changes button-->
+                            <button class="btn btn-primary" type="submit">Save changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

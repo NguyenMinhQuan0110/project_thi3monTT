@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Page</title>
+    <link rel="stylesheet" href="/css/index.css">
+    
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/home">
+                <img src="/img/image(1280).png" alt="">
+                <h1>SportNew</h1>
+            </a>           
+        </div>
+        <!-- Thanh tìm kiếm -->
+        <div class="search-container">
+            <form action="/search" method="get">
+                <input type="text" placeholder="Tìm kiếm bài viết..." name="keywords" >
+                <button type="submit">Tìm</button>
+            </form>
+        </div>
+        <div class="login-register-container">
+            <% if (session.userLogin) { %>
+                <div class="user-info">
+                    <a href="/update-profile" style="text-decoration: none; color: black;">
+                    <img src="/img/avatar/<%= session.userLogin.avatar || '3de6a81aad5f0c01554e-1714647805-183319avatar.jpg' %>" alt="" style="border-radius: 30px; min-width: 40px;height: 60px;object-fit: cover;">
+                    <span style="font-style:oblique; font-size: 20px;"><%= session.userLogin.username %></span></a>
+                    <a href="/logout"><button>Đăng xuất</button></a>
+                </div>
+            
+            <% if (session.userLogin.roles && session.userLogin.roles.some(role => role.id === 3||role.id===1)) { %>
+                <a href="/admin/index" style="text-decoration: none;color:white;"><button style="position: absolute; right: 0px; top: 10px;">Hello Admin</button></a>
+            <% } %>
+            <% } else { %>
+                <a href="/login"><button>Đăng nhập</button></a>
+                <a href="/register"><button>Đăng ký</button></a>
+            <% } %>
+        </div>
+        
+    </header>
+    <div class="menu">
+        
+        <ul>
+            <li><a href="/home">Trang chủ</a></li>
+            <li><a href="/category/1">Bóng đá Việt Nam</a>
+                    <ul>
+                        <li><a href="/category/2">Đội tuyển quốc gia</a></li>
+                        <li><a href="/category/3">V-league</a></li>
+                        <li><a href="/category/4">Bóng đá trẻ</a></li>
+                        <li><a href="/category/5">Bóng đá Nữ</a></li>
+                        <li ><a href="">Xem thêm <img src="/img/iconmuiten.png" alt="" ></a>
+                            <ul>
+                                <li><a href="/category/6">Futsan</a></li>
+                                <li><a href="/category/7">AFC Cup-C1</a></li>
+                                <li><a href="/category/11">U23 Châu Á</a></li>
+                                <li><a href="/category/10">U19 Châu Á</a></li>
+                                <li><a href="/category/9">U21 Quốc Gia</a></li>
+                                <li><a href="/category/8">Cup Quốc Gia</a></li>
+                            </ul>    
+                        </li>
+                    </ul>                   
+            </li>
+            <li><a href="/category/12">Bóng đá quốc tế</a>
+                <ul>
+                    <li><a href="/category/13">Bóng đá Anh</a></li>
+                    <li><a href="/category/14">Bóng đá Tây Ban Nha</a></li>
+                    <li><a href="/category/15">Bóng đá Ý</a></li>
+                    <li><a href="/category/16">Bóng đá Đức</a></li>
+                    <li><a href="/category/17">Bóng đá Pháp</a></li>
+                    <li><a href="/category/18">C1 Châu Âu</a></li>
+                    <li ><a href="">Xem thêm <img src="/img/iconmuiten.png" alt="" ></a>
+                        <ul>
+                            <li><a href="/category/19">Các giải khác</a></li>
+                            <li><a href="/category/20">UAFA Nations League</a></li>
+                            <li><a href="/category/21">Copa America 2024</a></li>
+                            <li><a href="/category/22">C2 Châu Âu</a></li>
+                            <li><a href="/category/23">C3 Châu Âu</a></li>
+                            <li><a href="/category/24">CONCACAP Gold Cup</a></li>
+                        </ul>    
+                    </li>
+                </ul>     
+            </li>
+            <li><a href="/category/25">Esports</a>
+                <ul>
+                    <li><a href="/category/26">LMHT</a></li>
+                    <li><a href="/category/27">Đấu trường chân lý</a></li>
+                    <li><a href="/category/28">LMHT tốc chiến</a></li>
+                    <li><a href="/category/29">Vanlorant</a></li>
+                    <li><a href="/category/30">PUPG</a></li>
+                    <li ><a href="">Xem thêm <img src="/img/iconmuiten.png" alt="" ></a>
+                        <ul>
+                            <li><a href="/category/31">FIFA online 04</a></li>
+                            <li><a href="/category/32">Dota 2</a></li>
+                            <li><a href="/category/33">PES</a></li>
+                            <li><a href="/category/34">Liên quân Mobie</a></li>
+                        </ul>    
+                    </li>
+                </ul>     
+            </li>
+            <li><a href="/category/35">Chuyển nhượng</a></li>
+            <li><a href="/category/36">Nhận định</a></li>
+            <li><a href="/category/37">Thê thao</a>
+                <ul>
+                    <li><a href="/category/38">Bóng chuyền</a></li>
+                    <li><a href="/category/39">Bóng rổ</a></li>
+                    <li><a href="/category/40">Cầu lông</a></li>
+                    <li><a href="/category/41">Cờ vua</a></li>
+                    <li><a href="/category/42">Bóng bàn</a></li>
+                    <li><a href="/category/43">Bóng đá phủi</a></li>
+                    <li ><a href="">Xem thêm <img src="/img/iconmuiten.png" alt="" ></a>
+                        <ul>
+                            <li><a href="/category/44">Quần vợt</a></li>
+                            <li><a href="/category/45">Võ thuật</a></li>
+                            <li><a href="/category/46">Boxing</a></li>
+                            <li><a href="/category/47">MMA</a></li>
+                            <li><a href="/category/48">Điền kinh</a></li>
+                            <li><a href="/category/49">Các môn khác</a></li>
+                        </ul>    
+                    </li>
+                </ul>   
+            </li>
+        </ul>
+    </div>
+    <div class="cactinkhac">
+        <div class="chitiettintuc">
+            <h2><%=article.title %> </h2>
+            <p class="news-summary"><%= article.createdAt.toLocaleString("vi-VN", { hour: "2-digit", minute: "2-digit", day: "2-digit", month: "2-digit", year: "numeric" }) %></p>
+            <div class="news-item">
+                <div class="news-thumbnail">
+                    <h3 class="news-title"><a href=""><%=article.description %></a></h3>
+                    <a href="">
+                        <% if (article.images && article.images.length > 0) { %>
+                            <div class="image-grid">
+                                <% article.images.forEach(image => { %>
+                                    <img src="/img/articles/<%= image.path %>" class="article-image">
+                                <% }); %>
+                            </div>
+                        <% } else { %>
+                            Không có ảnh
+                        <% } %>
+                    </a>
+                </div>
+                <div class="news-content">
+                    
+                    <p class="news-summary"><%=article.content %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Phần bình luận -->
+     
+    <div class="comment-section">
+        <h3>Bình luận</h3>
+        <div class="chitiettintuc">
+            <form class="comment-form" action="/detail/insertcomment" method="post">
+                <input type="hidden" value="<%= article.id %>" name="articleId">
+                <textarea placeholder="Viết bình luận của bạn..." required name="content"></textarea>
+                <button type="submit">Gửi</button>
+            </form>
+            <div class="comments-list">
+                <% commentts.forEach(comment=>{ %>
+                    <div class="comment">
+                        <strong><%= comment.user.username %></strong>
+                        <p><%= comment.content %></p>
+                        <% if (session.userLogin && (session.userLogin.id === comment.user.id || session.userLogin.roles.some(role => role.id === 1 || role.id === 3))) { %>
+                        <a href="/detail/deletecomment/<%= comment.id %>?articleId=<%= article.id %>" onclick="return confirm('Bạn chắc chắn muốn xóa chứ')"><button class="btn btn-secondary" >Xóa</button></a>
+                        <% } %> 
+                    </div>
+                <% }); %>
+                <div class="comment">
+                    <strong>Người dùng 1</strong>
+                    <p>Bài viết rất hay!</p>
+                    <button class="btn btn-secondary">Xóa</button>
+                </div>
+                <div class="comment">
+                    <strong>Người dùng 2</strong>
+                    <p>Cảm ơn tác giả!</p>
+                    <button>Xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

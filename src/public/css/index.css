@@ -1,0 +1,449 @@
+body{
+    margin: 0;
+}
+header{
+	display: flex;
+    background-color: rgba(212, 222, 222, 0.867);
+    width: 100%;
+    height: 100px;
+}
+.logo{
+	 display: flex;
+    margin: 5px 100px 5px 15%;
+    font-family:cursive;
+}
+.logo a{
+    display: flex;
+    justify-content: flex-start;
+    text-decoration: none;
+}
+.logo  img{
+   height: 40px;
+   width: 40px;
+   margin-top: 25px; 
+}
+.logo  h1{
+    margin: 0;
+    font-size: 30px;
+    margin-left: 5px;
+    margin-top: 25px;
+    color: black; 
+}
+.menu{
+    background-color: rgb(16, 13, 13);
+    width: 100%;
+    height: 35px;
+    
+}
+/* CSS cho thanh tìm kiếm */
+        .search-container {
+        	width: 30%; /* Điều chỉnh độ rộng của thanh tìm kiếm */
+		    margin-top: 30px;
+		    margin-left: auto; /* Đưa thanh tìm kiếm về phía bên phải */
+		    margin-right: 15px; /* Khoảng cách giữa thanh tìm kiếm và nút đăng nhập */
+        }
+
+        .search-container input[type=text] {
+            padding: 6px;
+            margin-top: 8px;
+            font-size: 17px;
+            border: none;
+            width: 60%;
+            background: #f1f1f1;
+        }
+
+        .search-container button {
+            padding: 6px;
+            margin-top: 8px;
+            font-size: 17px;
+            border: none;
+            background: #ddd;
+            cursor: pointer;
+        }
+
+        .search-container button:hover {
+            background: #bbb;
+        }
+
+        /* CSS cho nút đăng nhập và đăng ký */
+        .login-register-container {
+    			display: flex;
+    			align-items: center; /* Căn giữa theo chiều dọc */
+        }
+
+        .login-register-container button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .login-register-container button:hover {
+            background-color: #45a049;
+        }
+.menu ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+.menu ul li {
+    display: inline-block;
+    position: relative;
+}
+
+.menu ul li a{
+    display: block;
+    padding: 6px;
+    text-decoration: none;
+    color: #fff;
+    font-family:cursive;
+    white-space: nowrap;
+}
+.menu ul li a:hover{
+    text-decoration: underline;
+}
+.menu ul ul{
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    
+}
+.menu ul  ul li{
+    display: block;
+}
+
+.menu ul  ul li  a{
+    color: black;
+    font-family:cursive;
+}
+.menu ul  ul li  a img{
+    width:15px ;
+    height: 15px;
+    float:right;
+    margin-top: 3px;
+    
+}
+.menu ul  ul ul{
+    top: 0;
+    left: 100%;
+}
+.menu ul li:hover > ul {
+    display: block;
+}
+.menu ul  ul li:hover{
+    background-color: #bbb;
+}
+.menu ul ul li:hover > ul{
+    display: block;
+}
+.noidung{
+    width: 70%;
+    margin:0 auto;
+    display: flex;
+    align-items: stretch;
+}
+.noidung a{
+    text-decoration: none;
+    color: black;
+}
+.noidung h2{
+    font-family: cursive;
+    color: #fff;
+}
+.noidung h3{
+    font-family: cursive;
+}
+.noidung img{
+    border-radius: 5px;
+}
+.letrai{
+    margin-top: 10px;
+    padding: 10px;
+    background-color: rgb(230, 38, 38);
+    height: 95%;
+    flex: 1;
+    border-radius: 5px;
+    color: #fff;
+}
+.letrai a img{
+    width: 100%;
+}
+.legiua{
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.legiua .tren{
+    flex: 1;
+    overflow: hidden;
+    padding: 10px;
+}
+.legiua .tren a img{
+    width: 70%;
+}
+.legiua .duoi{
+    flex: 1;
+    overflow: hidden;
+    padding: 10px;
+}
+.legiua .duoi a img{
+    width: 70%;
+}
+.lephai{
+    
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.lephai a{
+    width: 100%;
+    flex: 1;
+    display: flex;
+    padding: 10px;
+}
+.lephai a .cottrai{
+    flex: 1;
+}
+.lephai a .cottrai img{
+    width: 120px;
+    height: auto;
+}
+.lephai a .cotphai{
+    flex: 2;
+}
+.lephai a .cotphai h3{
+    margin: 10px;
+}
+.tinhot{
+    height: 400px;
+    width: 70%;
+    margin: 0 auto;
+    overflow: hidden;
+    top: 5px;
+    font-family: cursive;
+}
+.tinhot h2{
+    font-size: 25px;
+    border-left: 5px solid red;
+}
+.tinhot .caccot{
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+}
+.tinhot .caccot a{
+    flex: 1;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+.tinhot .caccot a img{
+    width: 100%;
+    border-radius: 5px;
+}
+.cactinkhac{
+    width: 70%;
+    margin: 0 auto;
+    align-items: stretch; /* Đảm bảo chiều cao tự động mở rộng để phù hợp với nội dung */
+}
+.cactinkhac .chitiettintuc{
+    width: 80%;
+    align-items: stretch; /* Đảm bảo chiều cao tự động mở rộng để phù hợp với nội dung */
+}
+.cactinkhac .chitiettintuc .news-item{
+    display: block;
+    margin-bottom: 20px; /* Khoảng cách giữa các mục tin tức */
+    border-bottom:  1px solid #bbb;
+    width: 90%;
+}
+.cactinkhac .chitiettintuc .news-item img{
+    width: 100%;
+    height: auto;
+}
+.cactinkhac h2{
+    font-size: 25px;
+    font-family: cursive;
+    border-left: 5px solid red;   
+}
+.cactinkhac h3,p{
+    font-family: cursive;
+}
+.news-item {
+    display: flex;
+    margin-bottom: 20px; /* Khoảng cách giữa các mục tin tức */
+    border-bottom:  1px solid #bbb;
+    width: 70%;
+}
+
+.news-thumbnail {
+    flex: 0 0 auto;
+    margin-right: 20px; /* Khoảng cách giữa hình ảnh và nội dung tin tức */
+}
+
+.news-thumbnail img {
+    width: 200px;
+    height: auto;
+    display: block;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.news-content {
+    flex: 1;
+}
+
+.news-title {
+    font-size: 18px;
+    margin-top: 0;
+}
+.news-title a{
+    text-decoration: none;
+    color: black;
+}
+.news-summary {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #666;
+}
+footer{
+    align-items: stretch;
+    padding: 0;
+
+}
+footer a{
+    text-decoration: none;
+}
+footer a:hover{
+    text-decoration: underline;
+}
+footer .tren{
+    height:50%;
+}
+footer .tren .trentren{
+    background-color: rgba(212, 222, 222, 0.867);
+    height: 20%;
+    align-items: stretch;
+}
+footer .tren .trentren h1{
+    margin-top: 5px;
+}
+footer .tren .trentren img{
+    margin-top: 5px;
+}
+footer .tren .duoitren{
+    display: flex;
+    align-items: stretch;
+    width: 70%;
+    margin: 0 auto;
+    justify-content: space-around;
+    font-family: cursive;
+}
+footer .tren .duoitren a{
+    font-size: 14px;
+    color: #666;
+}
+footer .duoi{
+    background-color: rgba(212, 222, 222, 0.867);
+    height:50%;
+    font-family: cursive;
+}
+footer .duoi .trongduoi{
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+footer .duoi .trongduoi ul{
+    list-style: none;
+
+}
+footer .duoi .trongduoi ul li {
+    font-size: 14px;
+    color: #666;
+}
+footer .duoi .trongduoi ul li a{
+    font-size: 14px;
+    color: #666;
+}
+/*Comments*/
+.comment-section {
+    width: 70%;
+    margin: 20px auto;
+    font-family: cursive;
+}
+.comment-section .chitiettintuc{
+    width: 70%;
+    align-items: stretch; /* Đảm bảo chiều cao tự động mở rộng để phù hợp với nội dung */
+}
+.comment-section h3 {
+    font-size: 22px;
+    border-left: 5px solid red;
+    padding-left: 10px;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+.comment-form button {
+    align-self: flex-start;
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.comment-form button:hover {
+    background-color: #45a049;
+}
+
+.comments-list {
+    border-top: 1px solid #bbb;
+    padding-top: 10px;
+}
+
+.comment {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.comment strong {
+    color: #333;
+}
+/* CSS cho nút Xóa */
+.comment button {
+    align-self: flex-start;
+    padding: 8px 15px; /* Giống nút Gửi */
+    background-color: #6e6c6c; 
+    color: white; /* Giống nút Gửi */
+    border: none; /* Giống nút Gửi */
+    cursor: pointer; /* Giống nút Gửi */
+    border-radius: 5px; /* Giống nút Gửi */
+}
+
+.comment button:hover {
+    background-color: #6e6c6c; 
+}
