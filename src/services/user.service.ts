@@ -66,6 +66,43 @@ class UsersService {
         }
         return storedOTP === otp;
     }
+    // Gửi OTP để đặt lại mật khẩu
+    static async sendResetPasswordOTP(email: string) {
+        const otp = this.generateOTP();
+        await UsersService.saveOTP(email, otp);
+        await sendOTPEmail(email, otp);
+        return otp;
+    }
+
+    // Xác thực OTP để đặt lại mật khẩu
+    static async verifyResetPasswordOTP(email: string, otp: string): Promise<boolean> {
+        const storedOTP = await this.getOTP(email);
+        if (!storedOTP) {
+            return false; // OTP không tồn tại hoặc đã hết hạn
+        }
+        return storedOTP === otp;
+    }
+
+    // Xóa OTP sau khi đặt lại mật khẩu
+    static async deleteResetPasswordOTP(email: string) {
+        await otpRepository.delete({ email });
+    }
+
+    // Tìm người dùng theo email
+    static async getUserByEmail(email: string) {
+        return await userRepository.findOne({ where: { email } });
+    }
+
+    // Cập nhật mật khẩu theo email
+    static async updateUserPasswordByEmail(email: string, newPassword: string) {
+        const user = await userRepository.findOne({ where: { email } });
+        if (!user) {
+            throw new Error("Người dùng không tồn tại");
+        }
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        user.password = hashedPassword;
+        await userRepository.save(user);
+    }
 
     static async createUser(username: string, email: string, password: string, gender: string, avatar: string) {
         // Kiểm tra email/username tồn tại chưa

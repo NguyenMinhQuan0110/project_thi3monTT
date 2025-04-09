@@ -5,6 +5,7 @@ import express, {Request, Response, Router } from "express";
 import upload from "@middlewares/upload";
 import { checkAuth } from "@middlewares/checkAuth";
 import CommentController from "@controllers/comment.controller";
+import ForgotPasswordController from "@controllers/auth/forgotPassword.controller";
 
 const router: Router = express.Router();
 router.get('/home',(req: Request, res: Response) => {
@@ -48,6 +49,18 @@ router.get('/update-profile',checkAuth,(req: Request,res:Response)=>{
 router.post('/update-profile',upload.single("avatar"),(req: Request,res: Response)=>{
     Register.updateUser(req, res);
 })
+// Thêm route cho chức năng quên mật khẩu
+router.get('/forgot-password', (req: Request, res: Response) => {
+    ForgotPasswordController.showForgotPasswordForm(req, res);
+});
+
+router.post('/forgot-password', (req: Request, res: Response) => {
+    ForgotPasswordController.sendResetPasswordOTP(req, res);
+});
+
+router.post('/reset-password', (req: Request, res: Response) => {
+    ForgotPasswordController.resetPassword(req, res);
+});
 router.get('/search', (req: Request, res: Response) => {
     HomeController.searchArticles(req, res);
 });
