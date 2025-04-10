@@ -15,7 +15,7 @@ const imageRepository = AppDataSource.getRepository(Images)
 // Khởi tạo YouTube API client
 const youtube = google.youtube({
     version: 'v3',
-    auth: 'AIzaSyBnt3GU2nNSCQnXadCdE--4skC4zzSacco', // Thay bằng API Key của bạn
+    auth: 'Thay bằng API Key của bạn', // Thay bằng API Key của bạn
   });
 class ArticlesService{
     static async getAllCategories(){
@@ -223,7 +223,7 @@ class ArticlesService{
           const response = await axios.get('https://newsapi.org/v2/everything', {
             params: {
               q: 'sports', // Từ khóa tìm kiếm: thể thao
-              apiKey: '7ed6e8f0901045e5a58aa2474cd86452', // Thay bằng API Key của bạn
+              apiKey: 'thay bằng api key của bạn', // Thay bằng API Key của bạn
               language: 'en', // Ngôn ngữ (có thể đổi thành 'vi' nếu muốn tiếng Việt)
               sortBy: 'publishedAt', // Sắp xếp theo ngày xuất bản
             },
