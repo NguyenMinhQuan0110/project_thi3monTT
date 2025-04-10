@@ -35,8 +35,10 @@ class HomeController{
         // Tăng lượt xem khi người dùng truy cập bài viết
         await ArticlesService.incrementViews(id);
         const commentts= await CommentService.getCommentByIdArticle(id);
+        // Lấy video highlight từ YouTube
+        const highlights = await ArticlesService.getMatchHighlights(article.title as string);
 
-        res.render('detail.ejs', { session: req.session, article, commentts});
+        res.render('detail.ejs', { session: req.session, article,highlights, commentts});
     }
     static async searchArticles(req: Request, res: Response) {
         try {

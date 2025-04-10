@@ -5,10 +5,18 @@ import Images from "@entity/Images";
 import fs from 'fs';
 import path from "path";
 import { In, Like, Not } from "typeorm";
-
+import UsersService from "./user.service";
+import { sendNewArticleEmail } from "@config/email";
+import axios from "axios";
+import { google } from "googleapis";
 const categoryRepository = AppDataSource.getRepository(Categories)
 const articleRepository = AppDataSource.getRepository(Articles)
 const imageRepository = AppDataSource.getRepository(Images)
+// Khởi tạo YouTube API client
+const youtube = google.youtube({
+    version: 'v3',
+    auth: 'AIzaSyBnt3GU2nNSCQnXadCdE--4skC4zzSacco', // Thay bằng API Key của bạn
+  });
 class ArticlesService{
     static async getAllCategories(){
         return await categoryRepository.find();
@@ -26,7 +34,22 @@ class ArticlesService{
         users:{id:userId},
         views: 0 // Khởi tạo views = 0 khi tạo bài viết mới
        });
-       return await articleRepository.save(newArticle);
+       const savedArticle = await articleRepository.save(newArticle);
+
+        // Sau khi tạo bài viết thành công, gửi email thông báo cho tất cả người dùng
+        try {
+            const users = await UsersService.getAllUsers(); // Lấy danh sách tất cả người dùng
+            for (const user of users) {
+                if (user.email) {
+                    await sendNewArticleEmail(user.email, savedArticle.title!, savedArticle.description!, savedArticle.id!);
+                }
+            }
+        } catch (error: any) {
+            console.error('Error sending new article notification emails:', error.message);
+            // Không throw error để không làm gián đoạn quá trình tạo bài viết
+        }
+
+        return savedArticle;
     }
     static async updateCategory(articleId:number,categorieId:number[]){
         const article = await articleRepository.findOne({ where: { id: articleId } });
@@ -195,7 +218,46 @@ class ArticlesService{
     static async getCategoryById(categoryId: number) {
         return await categoryRepository.findOne({ where: { id: categoryId } });
     }
-
+    static async fetchExternalSportsNews(): Promise<any[]> {
+        try {
+          const response = await axios.get('https://newsapi.org/v2/everything', {
+            params: {
+              q: 'sports', // Từ khóa tìm kiếm: thể thao
+              apiKey: '7ed6e8f0901045e5a58aa2474cd86452', // Thay bằng API Key của bạn
+              language: 'en', // Ngôn ngữ (có thể đổi thành 'vi' nếu muốn tiếng Việt)
+              sortBy: 'publishedAt', // Sắp xếp theo ngày xuất bản
+            },
+          });
+          return response.data.articles; // Trả về danh sách bài viết từ NewsAPI
+        } catch (error) {
+          console.error('Error fetching external news:', error);
+          throw new Error('Không thể lấy tin tức từ nguồn bên ngoài');
+        }
+    } 
+    // Thêm phương thức mới: Lấy video highlight từ YouTube
+  static async getMatchHighlights(matchTitle: string): Promise<any[]> {
+    try {
+        const response = await youtube.search.list({
+          part: ['snippet'],
+          q: `${matchTitle} highlights`,
+          maxResults: 3,
+          type: ['video'],
+          videoEmbeddable: 'true',
+        });
+        if (!response.data.items || !Array.isArray(response.data.items)) {
+          return [];
+        }
+        return response.data.items.map(item => ({
+          title: item.snippet?.title || 'Không có tiêu đề', // Nếu snippet undefined, dùng giá trị mặc định
+          videoId: item.id?.videoId || '', // Nếu id hoặc videoId undefined, dùng chuỗi rỗng
+          embedUrl: item.id?.videoId ? `https://www.youtube.com/embed/${item.id.videoId}` : '', // Kiểm tra videoId trước khi tạo URL
+          thumbnail: item.snippet?.thumbnails?.default?.url || '/img/default-thumbnail.jpg', // Nếu thumbnails hoặc default undefined, dùng ảnh mặc định
+        }));
+      } catch (error) {
+        console.error('Error fetching YouTube highlights:', error);
+        throw new Error('Không thể lấy video highlight từ YouTube');
+      }
+  }  
 }
 
 export default ArticlesService;

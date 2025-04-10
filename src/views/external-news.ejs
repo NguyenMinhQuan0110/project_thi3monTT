@@ -127,86 +127,24 @@
             </ul>
     </div>
     
-    <div class="noidung">
-       <div class="letrai">
-		            <a href="/detail/<%= latestArticle[0].id %>">
-		                <img src="/img/articles/<%= latestArticle[0].images[0].path %>" alt="">
-		                <h2><%= latestArticle[0].title%></h2>
-		            </a>
-		            <h3><%= latestArticle[0].description %></h3>
-       </div>
-       <div class="legiua">
-            <div class="tren" >
-
-		                <a href="/detail/<%= latestArticle[1].id %>">
-		                    <img src="/img/articles/<%= latestArticle[1].images[0].path %>" alt="">
-		                    <h3><%= latestArticle[1].title%></h3>
-		                </a>
-  
-            </div>
-             <div class="duoi"> 
-
-		                <a href="/detail/<%= latestArticle[2].id %>">
-		                    <img src="/img/articles/<%= latestArticle[2].images[0].path %>" alt="">
-		                    <h3><%= latestArticle[2].title%></h3>
-		                </a>
-
-             </div> 
-       </div>
-       <div class="lephai">
-             <% latestArticle.slice(3).forEach(article => { %>
-                <a href="/detail/<%= article.id %>">
-                    <div class="cottrai"><img src="/img/articles/<%= article.images[0].path %>" alt=""></div>
-                    <div class="cotphai"><h3><%=article.title%></h3></div>
-                </a>
-             <% }) %>
-       </div>
-    </div>
-	<div class="tinhot">
-        <h2>Tin nóng</h2>
-        <div class="caccot">
-            <% if (topViewedArticles && topViewedArticles.length > 0) { %>
-                <% topViewedArticles.forEach(article => { %>
-                    <a href="/detail/<%= article.id %>">
-                        <div class="cottrai">
-                            <img src="/img/articles/<%= article.images && article.images.length > 0 ? article.images[0].path : 'default-image.jpg' %>" alt="">
-                        </div>
-                        <div class="cotphai">
-                            <h3><%= article.title %></h3>
-                        </div>
-                    </a>
-                <% }) %>
-            <% } else { %>
-                <p>Chưa có bài viết nào nổi bật.</p>
-            <% } %>
-        </div>
-    </div>
-
-   <div class="cactinkhac">
-        <h2>Các tin khác</h2>
-        <div id="other-articles-list">
-            <% if (otherArticles && otherArticles.length > 0) { %>
-                <% otherArticles.forEach(article => { %>
-                    <div class="news-item">
-                        <div class="news-thumbnail">
-                            <a href="/detail/<%= article.id %>">
-                                <img src="/img/articles/<%= article.images && article.images.length > 0 ? article.images[0].path : 'default-image.jpg' %>" alt="News Thumbnail">
-                            </a>
-                        </div>
-                        <div class="news-content">
-                            <h3 class="news-title"><a href="/detail/<%= article.id %>"><%= article.title %></a></h3>
-                            <p class="news-summary"><%= article.description %></p>
-                        </div>
+    <div class="external-news" style="margin-left: 20%;">
+        <h2>Tin tức thể thao từ nguồn bên ngoài</h2>
+        <div id="external-news-list">
+            <% externalNews.forEach(news => { %>
+                <div class="news-item">
+                    <div class="news-thumbnail">
+                        <a href="<%= news.url %>" target="_blank">
+                            <img src="<%= news.urlToImage || '/img/default-image.jpg' %>" alt="News Thumbnail">
+                        </a>
                     </div>
-                <% }) %>
-            <% } else { %>
-                <p>Chưa có bài viết nào khác.</p>
-            <% } %>
+                    <div class="news-content">
+                        <h3 class="news-title"><a href="<%= news.url %>" target="_blank"><%= news.title %></a></h3>
+                        <p class="news-summary"><%= news.description || 'Không có mô tả' %></p>
+                    </div>
+                </div>
+            <% }) %>
         </div>
-        <% if (totalOtherArticles > 1) { %>
-            <button id="show-more-btn" style="display: block; margin: 20px auto; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; border-radius: 5px;">Show More</button>
-        <% } %>       
-   </div>
+    </div>
     <footer>
         <div class="tren">
             <div class="trentren">
@@ -272,40 +210,6 @@
             </div>
         </div>
     </footer>
-<!-- Truyền danh sách latestArticleIds để sử dụng trong JavaScript -->
-<script>
-    const latestArticleIds = JSON.parse('<%- JSON.stringify(latestArticleIds) %>');
-    let currentSkip = 1; // Số bài viết đã hiển thị ban đầu
-
-    document.getElementById('show-more-btn')?.addEventListener('click', async () => {
-        const response = await fetch(`/load-more-articles?skip=${currentSkip}&latestArticleIds=${latestArticleIds.join(',')}`);
-        const data = await response.json();
-
-        const articlesList = document.getElementById('other-articles-list');
-        data.articles.forEach(article => {
-            const articleElement = document.createElement('div');
-            articleElement.className = 'news-item';
-            articleElement.innerHTML = `
-                <div class="news-thumbnail">
-                    <a href="/detail/${article.id}">
-                        <img src="/img/articles/${article.images && article.images.length > 0 ? article.images[0].path : 'default-image.jpg'}" alt="News Thumbnail">
-                    </a>
-                </div>
-                <div class="news-content">
-                    <h3 class="news-title"><a href="/detail/${article.id}">${article.title}</a></h3>
-                    <p class="news-summary">${article.description}</p>
-                </div>
-            `;
-            articlesList.appendChild(articleElement);
-        });
-
-        currentSkip += 1; // Tăng số bài viết đã hiển thị
-
-        // Ẩn nút "Show More" nếu không còn bài viết để tải
-        if (!data.hasMore) {
-            document.getElementById('show-more-btn').style.display = 'none';
-        }
-    });
 </script>
 </body>
 </html>

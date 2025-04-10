@@ -103,6 +103,7 @@
             <li><a href="/category/35">Chuyển nhượng</a></li>
             <li><a href="/category/36">Nhận định</a></li>
             <li><a href="/category/37">Thê thao</a>
+            <li><a href="/external-news">Tin tức bên ngoài</a></li>
                 <ul>
                     <li><a href="/category/38">Bóng chuyền</a></li>
                     <li><a href="/category/39">Bóng rổ</a></li>
@@ -148,6 +149,18 @@
                     <p class="news-summary"><%=article.content %></p>
                 </div>
             </div>
+            <!-- Hiển thị video highlight từ YouTube -->
+            <% if (highlights && highlights.length > 0) { %>
+                <h3>Video Highlight</h3>
+                <% highlights.forEach(video => { %>
+                    <div class="highlight-item" style="margin-bottom: 20px;">
+                        <h4><%= video.title %></h4>
+                        <iframe width="560" height="315" src="<%= video.embedUrl %>" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>Không tìm thấy video highlight.</p>
+            <% } %>
         </div>
     </div>
     <!-- Phần bình luận -->
@@ -170,16 +183,6 @@
                         <% } %> 
                     </div>
                 <% }); %>
-                <div class="comment">
-                    <strong>Người dùng 1</strong>
-                    <p>Bài viết rất hay!</p>
-                    <button class="btn btn-secondary">Xóa</button>
-                </div>
-                <div class="comment">
-                    <strong>Người dùng 2</strong>
-                    <p>Cảm ơn tác giả!</p>
-                    <button>Xóa</button>
-                </div>
             </div>
         </div>
     </div>

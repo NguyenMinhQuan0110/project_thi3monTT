@@ -6,6 +6,7 @@ import upload from "@middlewares/upload";
 import { checkAuth } from "@middlewares/checkAuth";
 import CommentController from "@controllers/comment.controller";
 import ForgotPasswordController from "@controllers/auth/forgotPassword.controller";
+import ArticlesService from "@services/articles.service";
 
 const router: Router = express.Router();
 router.get('/home',(req: Request, res: Response) => {
@@ -77,4 +78,12 @@ router.get('/category/:categoryId', (req: Request, res: Response) => {
 router.get("/load-more-category", (req: Request, res: Response) => {
     HomeController.loadMoreCategory(req, res);
 });
+router.get('/external-news', async (req, res) => {
+    try {
+      const externalNews = await ArticlesService.fetchExternalSportsNews();
+      res.render('external-news', { externalNews, session: req.session });
+    } catch (error) {
+      res.render('external-news', { error: 'Không thể tải tin tức bên ngoài', externalNews: [] });
+    }
+  });
 export default router; 
