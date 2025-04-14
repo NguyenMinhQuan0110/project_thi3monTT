@@ -158,6 +158,14 @@ class HomeController{
             res.status(500).json({ error: 'Đã có lỗi xảy ra khi tải thêm bài viết.' });
         }
     }
+    static async externalNews(req:Request,res:Response){
+        try {
+            const externalNews = await ArticlesService.fetchExternalSportsNews();
+            res.render('external-news', { externalNews, session: req.session });
+          } catch (error) {
+            res.render('external-news', { error: 'Không thể tải tin tức bên ngoài', externalNews: [] });
+          }
+    }
 
 }
 export default HomeController;

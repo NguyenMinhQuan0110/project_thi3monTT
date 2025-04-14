@@ -3,10 +3,10 @@ import nodemailer from 'nodemailer';
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 587,
-    secure: false, // true for 465, false for other ports
+    secure: false, 
     auth: {
-        user: "mail của bạn ", // Email của bạn
-        pass: "thay mật khẩu ứng dụng mail của bạn", // Mật khẩu ứng dụng của email
+        user: "your email", 
+        pass: "your password app", 
     },
 });
 

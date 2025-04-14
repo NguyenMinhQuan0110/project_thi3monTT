@@ -107,6 +107,28 @@ class Register {
             res.redirect("/updateProfile");
         }
     }
+    static async deleteAccount(req: any, res: Response) {
+        const userId = req.session.userLogin?.id;
+
+        try {
+            if (!userId) throw new Error('Bạn cần đăng nhập để xóa tài khoản');
+
+            await UsersService.deleteUser(userId);
+
+            // Hủy session và chuyển về trang đăng nhập
+            req.session.destroy((err:any) => {
+                if (err) console.error('Error destroying session:', err);
+                res.redirect('/login');
+            });
+        } catch (error:any) {
+            console.log(error);
+            res.render('auth/updateProfile', { 
+                user: req.session.userLogin, 
+                error: error.message || 'Không thể xóa tài khoản', 
+                success: null 
+            });
+        }
+    }
 }
 
 export default Register;

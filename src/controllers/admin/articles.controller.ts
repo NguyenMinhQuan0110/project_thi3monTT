@@ -14,7 +14,7 @@ class indexArticles{
     static async createArticle(req: any, res:Response){
         try {
             const { title, description, content, categories } = req.body;
-            const userId = req.session.userLogin.id; // Lấy userId từ session
+            const userId = req.session.userLogin.id; 
             
             if(!categories){
                 console.log('chọn danh mục cho bố');

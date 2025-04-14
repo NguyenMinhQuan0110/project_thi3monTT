@@ -50,6 +50,10 @@ router.get('/update-profile',checkAuth,(req: Request,res:Response)=>{
 router.post('/update-profile',upload.single("avatar"),(req: Request,res: Response)=>{
     Register.updateUser(req, res);
 })
+// Thêm route xóa tài khoản
+router.post('/delete-account', checkAuth, (req: Request, res: Response) => {
+    Register.deleteAccount(req, res);
+});
 // Thêm route cho chức năng quên mật khẩu
 router.get('/forgot-password', (req: Request, res: Response) => {
     ForgotPasswordController.showForgotPasswordForm(req, res);
@@ -79,11 +83,6 @@ router.get("/load-more-category", (req: Request, res: Response) => {
     HomeController.loadMoreCategory(req, res);
 });
 router.get('/external-news', async (req, res) => {
-    try {
-      const externalNews = await ArticlesService.fetchExternalSportsNews();
-      res.render('external-news', { externalNews, session: req.session });
-    } catch (error) {
-      res.render('external-news', { error: 'Không thể tải tin tức bên ngoài', externalNews: [] });
-    }
+    HomeController.externalNews(req,res);
   });
 export default router; 

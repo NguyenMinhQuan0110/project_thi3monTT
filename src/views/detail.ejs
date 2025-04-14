@@ -151,7 +151,7 @@
             </div>
             <!-- Hiển thị video highlight từ YouTube -->
             <% if (highlights && highlights.length > 0) { %>
-                <h3>Video Highlight</h3>
+                <h3>Video liên quan</h3>
                 <% highlights.forEach(video => { %>
                     <div class="highlight-item" style="margin-bottom: 20px;">
                         <h4><%= video.title %></h4>
@@ -159,7 +159,7 @@
                     </div>
                 <% }) %>
             <% } else { %>
-                <p>Không tìm thấy video highlight.</p>
+                <p>Không tìm thấy video liên quan.</p>
             <% } %>
         </div>
     </div>

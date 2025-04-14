@@ -49,5 +49,5 @@ app.use('/',webRouter);
 app.use('/admin',adminRouter);
 
 app.listen(port, () => {
-  console.log(`[server]: Server is running at http://192.168.100.176:${port}`);
+  console.log(`[server]: Server is running at http://localhost:${port}`);
 });

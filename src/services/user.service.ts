@@ -4,10 +4,14 @@ import Roles from "@entity/Roles";
 import Users from "@entity/Users";
 import OtpVerification from "@entity/OtpVerification"; // Thêm import
 import bcrypt from 'bcrypt';
+import path from "path";
+import fs from "fs";
+import Comments from "@entity/Comments";
 
 const userRepository = AppDataSource.getRepository(Users);
 const roleRepository = AppDataSource.getRepository(Roles);
 const otpRepository = AppDataSource.getRepository(OtpVerification); // Thêm repository cho OtpVerification
+const commentRepository = AppDataSource.getRepository(Comments);
 
 class UsersService {
     static async getAllUsers() {
@@ -183,6 +187,34 @@ class UsersService {
             user.roles = roles;
         }
         return await userRepository.save(user);
+    }
+    static async deleteUser(userId: number) {
+        try {
+            const user = await userRepository.findOne({ 
+                where: { id: userId },
+                relations: ['articles', 'comments'] // Thêm 'comments'
+            });
+            if (!user) throw new Error('Người dùng không tồn tại');
+
+            // Xóa ảnh đại diện nếu có
+            if (user.avatar) {
+                const avatarPath = path.join(__dirname, "../../src/public/img/avatar", user.avatar);
+                if (fs.existsSync(avatarPath)) {
+                    fs.unlinkSync(avatarPath);
+                }
+            }
+
+            // Xóa tất cả bình luận của người dùng
+            if (user.comments && user.comments.length > 0) {
+                await commentRepository.delete({ user: { id: userId } });
+            }
+
+            // Xóa người dùng
+            await userRepository.delete(userId);
+        } catch (error) {
+            console.error('Error deleting user:', error);
+            throw new Error('Không thể xóa tài khoản');
+        }
     }
 }
 
